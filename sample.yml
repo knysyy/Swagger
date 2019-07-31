@@ -1,0 +1,123 @@
+swagger: "2.0"
+info:
+  title: "Sample API"
+  version: "1.0.0"
+  description: "Swaggerの入門用ファイル"
+  termsOfService: ""
+  contact:
+    email: ""
+  license:
+    name: ""
+    url: ""
+paths:
+  /users/{userId}:
+    get:
+      summary: "会員情報取得API"
+      description: "指定されたuserIdの情報を返却します。"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "取得したい会員のID"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: "object"
+            properties:
+              user:
+                $ref: "#/definitions/User"
+    post:
+      summary: "会員情報追加API"
+      description: "会員を追加し、追加した会員情報を返却します。"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "変更したい会員のID"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "name"
+          in: "formData"
+          description: "追加する会員の名前"
+          required: true
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "追加する会員のメールアドレス"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "追加する会員のパスワード"
+          required: true
+          type: "string"
+        - name: "password_confirmation"
+          in: "formData"
+          description: "確認用パスワード"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: "object"
+            properties:
+              user:
+                $ref: "#/definitions/User"
+    put:
+      summary: "会員情報変更API"
+      description: "会員情報を変更し、変更した会員情報を返却します。"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "変更したい会員のID"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "name"
+          in: "formData"
+          description: "変更後の会員の名前"
+          required: true
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "変更後の会員のメールアドレス"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          schema:
+            type: "object"
+            properties:
+              user:
+                $ref: "#/definitions/User"
+    delete:
+      summary: "会員情報削除API"
+      description: "指定されたuserIdの会員を削除します。"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "削除したい会員のID"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        200:
+          description: "成功時のレスポンス"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+        example: "test"
+      email:
+        type: "string"
+        example: "test@test.test"
